@@ -51,15 +51,19 @@
     <string name="edit">Edit</string>
     <string name="phone_icon">Phone Icon</string>
     <string name="county">County</string>
-    <string name="county_name">County Name</string>
+    <string name="county_name">County Name...</string>
     <string name="location">Location</string>
-    <string name="constituency_name">Constituency Name</string>
+    <string name="constituency_name">Constituency Name...</string>
     <string name="constituency">Constituency</string>
-    <string name="ward_name">Ward Name</string>
+    <string name="ward_name">Ward Name...</string>
     <string name="ward">Ward</string>
     <string name="contact">Contact</string>
     <string name="phone_number">Phone Number</string>
     <string name="phone">Phone</string>
+    <string name="name_hint">Name...</string>
+    <string name="camera">Camera</string>
+    <string name="change">Change</string>
+    <string name="finish">Finish</string>
 
     <string-array name="aspirant_positions">
         <item>President</item>

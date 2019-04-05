@@ -10,4 +10,7 @@
     <dimen name="width_256dp">256dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
     <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_32dp">32dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_196dp">196dp</dimen>
 </resources>

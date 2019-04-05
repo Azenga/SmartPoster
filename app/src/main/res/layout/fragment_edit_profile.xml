@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.publics.EditProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dimen_16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:contentDescription="@string/account"
+                android:src="@drawable/ic_account_circle_gray_48dp" />
+
+            <EditText
+                android:id="@+id/name_et"
+                android:layout_width="@dimen/width_256dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:hint="@string/name_hint"
+                android:inputType="textPersonName"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:contentDescription="@string/camera"
+                android:src="@drawable/ic_photo_camera_gray_32dp" />
+
+            <ImageView
+                android:id="@+id/profile_pic_iv"
+                android:layout_width="@dimen/dimen_196dp"
+                android:layout_height="@dimen/dimen_196dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:contentDescription="@string/account"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_account_box_gray_196dp" />
+
+            <Button
+                android:id="@+id/change_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:text="@string/change" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:contentDescription="@string/location"
+                android:src="@drawable/ic_location_on_gray_32dp" />
+
+            <LinearLayout
+                android:layout_width="@dimen/width_256dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/county_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:hint="@string/county_name"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/constituency_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:hint="@string/constituency_name"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/ward_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/ward_name"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="@dimen/width_256dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/accent_btn"
+            android:text="@string/finish"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</ScrollView>
