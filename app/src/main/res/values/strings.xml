@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">SmartPoster</string>
+    <string name="welcome_text">Welcome to our Smart Poster for Online Campaigns</string>
+    <string name="floss_text">Politicians all over Kenya use SmartPoster for e-campaign and turn their dreams to reality</string>
+    <string name="login_text">Log in</string>
+    <string name="hello_blank_fragment">New Fragment In Town</string>
+    <string name="caret_down">Caret Down</string>
+    <string name="top_aspirants">Top Aspirants</string>
+    <string name="public_dash_title">Public</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="user_avatar">User Avatar</string>
+    <string name="username">Username</string>
+    <string name="more_vertical">More Vertical</string>
+    <string name="post_image">Post Image</string>
+    <string name="comment">Comment</string>
+    <string name="default_post">The post message should be in this TextView should be dark and it\'s appearance should be medium...</string>
+    <string name="like_button_image">Like Button Image</string>
+    <string name="share_button_image">Share Button Image</string>
+    <string name="view_comments">View Comments</string>
+    <string name="read_more">Read More...</string>
+    <string name="default_likes">10 likes</string>
+    <string name="title_activity_blog_post">BlogPostActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="sign_in_with_google">Sign In With Google</string>
+    <string name="or">OR</string>
+    <string name="email_address_hint">Email Address...</string>
+    <string name="password_hint">Password...</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="info_button">Info Button</string>
+    <string name="signup_with_google">Signup with Google</string>
+    <string name="confirm_password_hint">Confirm Password...</string>
+    <string name="already_have_an_account">Already Have An Account?</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="posts">Posts</string>
+    <string name="aspirants">Aspirants</string>
+    <string name="account">Account</string>
+    <string name="chats">Chats</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="more_vert">More Vert</string>
+    <string name="edit">Edit</string>
+    <string name="phone_icon">Phone Icon</string>
+    <string name="county">County</string>
+    <string name="county_name">County Name</string>
+    <string name="location">Location</string>
+    <string name="constituency_name">Constituency Name</string>
+    <string name="constituency">Constituency</string>
+    <string name="ward_name">Ward Name</string>
+    <string name="ward">Ward</string>
+    <string name="contact">Contact</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone">Phone</string>
+
+    <string-array name="aspirant_positions">
+        <item>President</item>
+        <item>Governor</item>
+        <item>Senator</item>
+        <item>Member of Parliament</item>
+        <item>Member of County Assembly</item>
+    </string-array>
+
+    <!--Test Data-->
+
+    <string-array name="usernames">
+        <item>Raila</item>
+        <item>Uhuru</item>
+        <item>Kalonzo</item>
+        <item>Obama</item>
+        <item>Musalia</item>
+        <item>Isaac</item>
+        <item>Samoei</item>
+        <item>MutulaJr</item>
+        <item>Sakaja</item>
+        <item>Joho</item>
+    </string-array>
+
+    <integer-array name="likes">
+        <item>10200</item>
+        <item>6767</item>
+        <item>9321</item>
+        <item>1007365</item>
+        <item>20</item>
+        <item>4</item>
+        <item>9321</item>
+        <item>587629</item>
+        <item>7389</item>
+        <item>200000</item>
+    </integer-array>
+
+    <string-array name="messages">
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 1...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 2...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 3...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 4...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 5...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 6...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 7...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 8...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 9...</item>
+        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 10...</item>
+    </string-array>
+
+</resources>
+

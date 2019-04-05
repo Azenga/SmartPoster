@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "664728315877",
+    "firebase_url": "https://smartposter-4c082.firebaseio.com",
+    "project_id": "smartposter-4c082",
+    "storage_bucket": "smartposter-4c082.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664728315877:android:216e95254de416d1",
+        "android_client_info": {
+          "package_name": "com.shadow.smartposter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664728315877-qqsj5d2aja2iioeauku1s26pkhka02pk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadow.smartposter",
+            "certificate_hash": "8b7732adc54798f800c595d4cea8d6dabd3c0c59"
+          }
+        },
+        {
+          "client_id": "664728315877-imkqm50p0pggru57om9n06b41qhmik5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHnodT5x_dohSbtjouENZig4LWRPGHRZM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664728315877-imkqm50p0pggru57om9n06b41qhmik5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_posts"
+            android:icon="@drawable/ic_mail_outline_black_24dp"
+            android:title="@string/posts" />
+        <item
+            android:id="@+id/nav_aspirants"
+            android:icon="@drawable/ic_supervisor_account_black_24dp"
+            android:title="@string/aspirants" />
+        <item
+            android:id="@+id/nav_chats"
+            android:icon="@drawable/ic_chat_black_24dp"
+            android:title="@string/chats" />
+    </group>
+
+    <item android:title="@string/account">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="@string/profile" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
+</menu>
