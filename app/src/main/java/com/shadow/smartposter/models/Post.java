@@ -1,26 +1,24 @@
 package com.shadow.smartposter.models;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 
 public class Post implements Serializable {
 
+    @Exclude
     private String id;
 
-    private String ownerAvatar;
-    private String onwerUsername;
-    //    private String image;
+    private String ownerId;
     private int image;
-    private String type;
     private int likes;
-    private String message;
+    private String caption;
 
-    public Post(String ownerAvatar, String onwerUsername, int image, String type, int likes, String message) {
-        this.ownerAvatar = ownerAvatar;
-        this.onwerUsername = onwerUsername;
+    public Post(String ownerId, int image, int likes, String caption) {
+        this.ownerId = ownerId;
         this.image = image;
-        this.type = type;
         this.likes = likes;
-        this.message = message;
+        this.caption = caption;
     }
 
     public String getId() {
@@ -31,20 +29,12 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public String getOwnerAvatar() {
-        return ownerAvatar;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwnerAvatar(String ownerAvatar) {
-        this.ownerAvatar = ownerAvatar;
-    }
-
-    public String getOnwerUsername() {
-        return onwerUsername;
-    }
-
-    public void setOnwerUsername(String onwerUsername) {
-        this.onwerUsername = onwerUsername;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public int getImage() {
@@ -55,14 +45,6 @@ public class Post implements Serializable {
         this.image = image;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getLikes() {
         return likes;
     }
@@ -71,11 +53,11 @@ public class Post implements Serializable {
         this.likes = likes;
     }
 
-    public String getMessage() {
-        return message;
+    public String getCaption() {
+        return caption;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 }

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_setup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SetupActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:contentDescription="@string/person_icon"
+            app:srcCompat="@drawable/ic_person_gray_32dp" />
+
+        <LinearLayout
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_hint"
+                android:inputType="textPersonName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+
+
+            <EditText
+                android:id="@+id/nick_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nickname"
+                android:inputType="textPersonName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/width_256dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dimen_8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:contentDescription="@string/contact"
+            app:srcCompat="@drawable/ic_phone_gray_32dp" />
+
+        <LinearLayout
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/contact_et"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/contact"
+                android:inputType="textWebEditText"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/width_256dp"
+        android:layout_height="1dp"
+        android:layout_margin="@dimen/dimen_8dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:contentDescription="@string/camera_icon"
+            app:srcCompat="@drawable/ic_camera_alt_gray_32dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image_civ"
+            android:layout_width="@dimen/dimen_96dp"
+            android:layout_height="@dimen/dimen_96dp"
+            android:src="@drawable/ic_account_circle_gray_96dp"
+            app:civ_border_color="@android:color/darker_gray"
+            app:civ_border_width="1dp" />
+
+        <Button
+            android:id="@+id/change_img_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:text="@string/change"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/width_256dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dimen_8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:contentDescription="@string/location"
+            app:srcCompat="@drawable/ic_location_on_gray_32dp" />
+
+        <LinearLayout
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/county_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/county"
+                android:inputType="text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+
+
+            <EditText
+                android:id="@+id/constituency_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/constituency"
+                android:inputType="text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+
+
+            <EditText
+                android:id="@+id/ward_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/ward"
+                android:inputType="text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/width_256dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dimen_8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:contentDescription="@string/public_icon"
+            app:srcCompat="@drawable/ic_public_gray_32dp" />
+
+        <LinearLayout
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/website_et"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/website"
+                android:inputType="textWebEditText"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/width_256dp"
+        android:layout_height="1dp"
+        android:layout_margin="@dimen/dimen_8dp" />
+
+
+    <Button
+        android:id="@+id/finish_setup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/finish"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white" />
+
+
+</LinearLayout>

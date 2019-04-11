@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shadow.smartposter">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SetupActivity"></activity>
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".BlogPostActivity"
             android:label="@string/title_activity_blog_post"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddPostActivity" />
+        <activity
+            android:name=".AddPostActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PublicDashboardActivity"
             android:label="@string/public_dash_title"

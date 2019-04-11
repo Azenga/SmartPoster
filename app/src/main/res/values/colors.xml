@@ -5,4 +5,9 @@
     <color name="colorAccent">#ff3d00</color>
     <color name="lightGray">#f4f4f4</color>
     <color name="coolGreen">#388e3c</color>
+
+
+    <color name="colorDoc">#2196f3</color>
+    <color name="colorVideo">#0069c0</color>
+    <color name="colorMusic">#f44336</color>
 </resources>

@@ -38,12 +38,6 @@ public class WelcomeTopFragment extends Fragment {
             ((WelcomeActivity) getActivity()).switchFragment(new WelcomeBottomFragment());
         });
 
-        Button gotoPostsButton = view.findViewById(R.id.go_to_posts_btn);
-        gotoPostsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), BlogPostActivity.class);
-            getActivity().startActivity(intent);
-        });
-
         //Login Intent
         Button gotoLoginBtn = view.findViewById(R.id.go_to_login_btn);
         gotoLoginBtn.setOnClickListener(v -> {

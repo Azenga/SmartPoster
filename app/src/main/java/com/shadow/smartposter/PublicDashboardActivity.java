@@ -11,13 +11,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.shadow.smartposter.fragments.publics.ProfileFragment;
 
 public class PublicDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "PublicDashboardActivity";
+
+    //Firebase Varibles
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mDb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +36,11 @@ public class PublicDashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_public_dashboard);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
+        mDb = FirebaseFirestore.getInstance();
+
+
         if (getSupportActionBar() != null) getSupportActionBar().setTitle("Profile");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -78,7 +94,7 @@ public class PublicDashboardActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle blog_post_bnv view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_posts) {
@@ -94,10 +110,52 @@ public class PublicDashboardActivity extends AppCompatActivity
             switchFragment(new ProfileFragment());
 
         } else if (id == R.id.nav_logout) {
+            logoutUser();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void logoutUser() {
+        mAuth.signOut();
+        startActivity(new Intent(this, WelcomeActivity.class));
+        finish();
+    }
+
+    private void getUserDetails() {
+
+        //Get Details of the current signed in user from firestore
+
+        if (mAuth.getCurrentUser() != null) {
+            String uid = mAuth.getCurrentUser().getUid();
+            mDb.collection("users")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener(
+                            documentSnapshot -> {
+
+                            }
+                    )
+                    .addOnFailureListener(e -> Log.e(TAG, "getUserDetails: Failed to Get User", e));
+
+        }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user == null) {
+            startActivity(new Intent(this, WelcomeActivity.class));
+            finish();
+        } else {
+            getUserDetails();
+        }
+    }
 }
+

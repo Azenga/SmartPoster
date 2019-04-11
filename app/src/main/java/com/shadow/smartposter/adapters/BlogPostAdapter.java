@@ -37,12 +37,8 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
 
         Post post = posts.get(i);
 
-        viewHolder.ownerUsernameTV.setText(post.getOnwerUsername());
-        viewHolder.postImageIV.setImageResource(post.getImage());
-        viewHolder.postTV.setText(post.getMessage());
+        viewHolder.postTV.setText(post.getCaption());
         viewHolder.likesTV.setText(post.getLikes() + " likes");
-
-        viewHolder.view.setOnClickListener(view -> Toast.makeText(context, post.getOnwerUsername() + " post clicked", Toast.LENGTH_SHORT).show());
 
     }
 

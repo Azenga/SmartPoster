@@ -2,7 +2,7 @@
     <string name="app_name">SmartPoster</string>
     <string name="welcome_text">Welcome to our Smart Poster for Online Campaigns</string>
     <string name="floss_text">Politicians all over Kenya use SmartPoster for e-campaign and turn their dreams to reality</string>
-    <string name="login_text">Log in</string>
+    <string name="start_text">Start</string>
     <string name="hello_blank_fragment">New Fragment In Town</string>
     <string name="caret_down">Caret Down</string>
     <string name="top_aspirants">Top Aspirants</string>
@@ -18,30 +18,29 @@
     <string name="more_vertical">More Vertical</string>
     <string name="post_image">Post Image</string>
     <string name="comment">Comment</string>
-    <string name="default_post">The post message should be in this TextView should be dark and it\'s appearance should be medium...</string>
+    <string name="default_post">The post caption should be in this TextView should be dark and it\'s appearance should be medium...</string>
     <string name="like_button_image">Like Button Image</string>
     <string name="share_button_image">Share Button Image</string>
     <string name="view_comments">View Comments</string>
     <string name="read_more">Read More...</string>
     <string name="default_likes">10 likes</string>
-    <string name="title_activity_blog_post">BlogPostActivity</string>
+    <string name="title_activity_blog_post">Posts</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="sign_in_with_google">Sign In With Google</string>
     <string name="or">OR</string>
     <string name="email_address_hint">Email Address...</string>
     <string name="password_hint">Password...</string>
     <string name="remember_me">Remember Me</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="sign_up">Sign up</string>
+    <string name="sign_up">Sign Up</string>
     <string name="info_button">Info Button</string>
-    <string name="signup_with_google">Signup with Google</string>
     <string name="confirm_password_hint">Confirm Password...</string>
     <string name="already_have_an_account">Already Have An Account?</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
+    <string name="login_text">Log In</string>
     <string name="posts">Posts</string>
     <string name="aspirants">Aspirants</string>
     <string name="account">Account</string>
@@ -64,6 +63,25 @@
     <string name="camera">Camera</string>
     <string name="change">Change</string>
     <string name="finish">Finish</string>
+    <string name="finish_setup">Finish Setup</string>
+    <string name="caption">Message...</string>
+    <string name="attach_file">Attach File</string>
+    <string name="arrow_back">Arrow Back</string>
+    <string name="new_post">New Post</string>
+    <string name="video_library">Video Library</string>
+    <string name="photo_library">Photo Library</string>
+    <string name="library_books">Library Books</string>
+    <string name="photo">Photo</string>
+    <string name="document">Document</string>
+    <string name="video">Video</string>
+    <string name="favourites">Favourites</string>
+    <string name="all_posts">All Posts</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="next">Next</string>
+    <string name="crop_image">Crop Image</string>
+    <string name="add_caption_hint">Add Caption...</string>
+    <string name="submit_post">Submit Post</string>
+    <string name="add_post">Add Post</string>
 
     <string-array name="aspirant_positions">
         <item>President</item>
@@ -73,46 +91,13 @@
         <item>Member of County Assembly</item>
     </string-array>
 
-    <!--Test Data-->
-
-    <string-array name="usernames">
-        <item>Raila</item>
-        <item>Uhuru</item>
-        <item>Kalonzo</item>
-        <item>Obama</item>
-        <item>Musalia</item>
-        <item>Isaac</item>
-        <item>Samoei</item>
-        <item>MutulaJr</item>
-        <item>Sakaja</item>
-        <item>Joho</item>
-    </string-array>
-
-    <integer-array name="likes">
-        <item>10200</item>
-        <item>6767</item>
-        <item>9321</item>
-        <item>1007365</item>
-        <item>20</item>
-        <item>4</item>
-        <item>9321</item>
-        <item>587629</item>
-        <item>7389</item>
-        <item>200000</item>
-    </integer-array>
-
-    <string-array name="messages">
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 1...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 2...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 3...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 4...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 5...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 6...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 7...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 8...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 9...</item>
-        <item>This is just a random message, i would have typed in something cool but I ain\'t got that much time to waste 10...</item>
-    </string-array>
+    <string name="web_client_id">664728315877-imkqm50p0pggru57om9n06b41qhmik5u.apps.googleusercontent.com</string>
+    <string name="web_client_secret">Mt2VKDYuO5Q29VvDI2dbVPmQ</string>
+    <string name="person_icon">Person Icon</string>
+    <string name="camera_icon">Camera Icon</string>
+    <string name="public_icon">Public Icon</string>
+    <string name="website">Website</string>
+    <string name="nickname">Nickname...</string>
 
 </resources>
 
