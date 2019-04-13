@@ -25,7 +25,7 @@ public class AddPostActivity extends AppCompatActivity {
 
     private void initComponents() {
 
-        postCaptionET = findViewById(R.id.caption_et);
+        postCaptionET = findViewById(R.id.post_caption_et);
 
         gobackToPostIB = findViewById(R.id.goback_to_posts_ib);
 

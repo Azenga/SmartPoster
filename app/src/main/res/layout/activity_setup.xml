@@ -37,7 +37,7 @@
 
 
             <EditText
-                android:id="@+id/nick_name_et"
+                android:id="@+id/nickname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/nickname"

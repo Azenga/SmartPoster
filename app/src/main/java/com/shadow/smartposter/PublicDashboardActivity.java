@@ -1,9 +1,12 @@
 package com.shadow.smartposter;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -14,20 +17,32 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.shadow.smartposter.fragments.publics.ProfileFragment;
+import com.shadow.smartposter.models.User;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PublicDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "PublicDashboardActivity";
 
-    //Firebase Varibles
+    //Firebase Variables
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDb;
+    private StorageReference mRef;
+
+    //Header LayoutWidgets
+    private CircleImageView profilePicCIV;
+    private TextView usernameTV;
 
 
     @Override
@@ -39,6 +54,7 @@ public class PublicDashboardActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
         mDb = FirebaseFirestore.getInstance();
+        mRef = FirebaseStorage.getInstance().getReference().child("avatars");
 
 
         if (getSupportActionBar() != null) getSupportActionBar().setTitle("Profile");
@@ -51,6 +67,11 @@ public class PublicDashboardActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View navigationHeaderView = navigationView.getHeaderView(0);
+
+        profilePicCIV = navigationHeaderView.findViewById(R.id.profile_image_civ);
+        usernameTV = navigationHeaderView.findViewById(R.id.username_tv);
+
         switchFragment(new ProfileFragment());
     }
 
@@ -58,8 +79,11 @@ public class PublicDashboardActivity extends AppCompatActivity
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if (fragment != null)
-            transaction.replace(R.id.fragment_container, fragment).commit();
+        if (fragment != null){
+            transaction.replace(R.id.fragment_container, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
 
     }
 
@@ -124,6 +148,26 @@ public class PublicDashboardActivity extends AppCompatActivity
         finish();
     }
 
+    private void updateUI(User user) {
+
+        if (user.getNickName() != null) usernameTV.setText(user.getNickName());
+        else usernameTV.setText(user.getName());
+
+        StorageReference profilePicRef = mRef.child(user.getImageName());
+
+        final long MB = 1024 * 1024;
+
+        profilePicRef.getBytes(MB)
+                .addOnSuccessListener(
+                        bytes -> {
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            profilePicCIV.setImageBitmap(bitmap);
+                        }
+                )
+                .addOnFailureListener(e -> Log.e(TAG, "updateUI: Failed Loading Image", e));
+
+    }
+
     private void getUserDetails() {
 
         //Get Details of the current signed in user from firestore
@@ -135,6 +179,21 @@ public class PublicDashboardActivity extends AppCompatActivity
                     .get()
                     .addOnSuccessListener(
                             documentSnapshot -> {
+
+                                if (documentSnapshot.exists()) {
+
+                                    User user = documentSnapshot.toObject(User.class);
+
+                                    if (user != null)
+                                        updateUI(user);
+
+                                } else {
+
+                                    Snackbar.make(findViewById(android.R.id.content), "No Account Info", Snackbar.LENGTH_LONG)
+                                            .setAction("Setup Your Account", view -> startActivity(new Intent(this, SetupActivity.class)))
+                                            .show();
+                                }
+
 
                             }
                     )
