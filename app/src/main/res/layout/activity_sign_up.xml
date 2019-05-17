@@ -43,6 +43,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_et" />
 
+    <EditText
+        android:id="@+id/confirm_pwd_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/login_edit_text"
+        android:drawableStart="@drawable/ic_lock_gray_24dp"
+        android:ems="10"
+        android:hint="@string/confirm_password_hint"
+        android:inputType="textPassword"
+        android:padding="@dimen/dimen_8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwd_et" />
+
     <Button
         android:id="@+id/email_signup_btn"
         android:layout_width="0dp"
@@ -98,23 +116,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/email_signup_btn" />
-
-    <EditText
-        android:id="@+id/confirm_pwd_et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/login_edit_text"
-        android:drawableStart="@drawable/ic_lock_gray_24dp"
-        android:ems="10"
-        android:hint="@string/confirm_password_hint"
-        android:inputType="textPassword"
-        android:padding="@dimen/dimen_8dp"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwd_et" />
 
 </android.support.constraint.ConstraintLayout>

@@ -59,6 +59,8 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle("Update Profile");
+
         mAth = FirebaseAuth.getInstance();
         mRef = FirebaseStorage.getInstance().getReference().child("avatars");
         mDb = FirebaseFirestore.getInstance();
@@ -130,48 +132,47 @@ public class SetupActivity extends AppCompatActivity {
 
     private void doUploads() {
 
-        if (!hasEmptyRequiredFields()) {
+        if (hasEmptyRequiredFields()) return;
 
-            progressDialog.setTitle("Registering User");
-            progressDialog.setMessage("Please Wait...");
-            progressDialog.setCanceledOnTouchOutside(true);
-            progressDialog.show();
+        progressDialog.setTitle("Registering User");
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCanceledOnTouchOutside(true);
+        progressDialog.show();
 
-            //Uploading Image to FirebaseStorage
-            if (imageSelected) {
+        //Uploading Image to FirebaseStorage
+        if (imageSelected) {
 
-                Bitmap bitmap = ((BitmapDrawable) profilePicCIV.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            Bitmap bitmap = ((BitmapDrawable) profilePicCIV.getDrawable()).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
-                byte[] bytes = baos.toByteArray();
+            byte[] bytes = baos.toByteArray();
 
-                if (mAth.getCurrentUser() != null) {
-                    String refName = mAth.getCurrentUser().getUid() + ".jpg";
+            if (mAth.getCurrentUser() != null) {
+                String refName = mAth.getCurrentUser().getUid() + ".jpg";
 
-                    StorageReference profilePicRef = mRef.child(refName);
+                StorageReference profilePicRef = mRef.child(refName);
 
-                    profilePicRef.putBytes(bytes)
-                            .addOnSuccessListener(
-                                    taskSnapshot -> {
-                                        Toast.makeText(this, "Profile Image Uploaded", Toast.LENGTH_SHORT).show();
-                                        uploadToFirestore(taskSnapshot.getMetadata().getName());
-                                    }
-                            )
-                            .addOnFailureListener(
-                                    e -> {
-                                        Toast.makeText(this, "Image Upload Failed", Toast.LENGTH_SHORT).show();
-                                        Log.e(TAG, "doUploads: image upload failure", e);
-                                        progressDialog.dismiss();
-                                    }
-                            );
+                profilePicRef.putBytes(bytes)
+                        .addOnSuccessListener(
+                                taskSnapshot -> {
+                                    Toast.makeText(this, "Profile Image Uploaded", Toast.LENGTH_SHORT).show();
+                                    uploadToFirestore(taskSnapshot.getMetadata().getName());
+                                }
+                        )
+                        .addOnFailureListener(
+                                e -> {
+                                    Toast.makeText(this, "Image Upload Failed", Toast.LENGTH_SHORT).show();
+                                    Log.e(TAG, "doUploads: image upload failure", e);
+                                    progressDialog.dismiss();
+                                }
+                        );
 
-                }
-            } else {
-                uploadToFirestore(null);
             }
-
+        } else {
+            uploadToFirestore(null);
         }
+
 
     }
 

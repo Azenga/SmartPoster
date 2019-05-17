@@ -15,4 +15,6 @@
     <dimen name="dimen_196dp">196dp</dimen>
     <dimen name="dimen_60dp">60dp</dimen>
     <dimen name="dimen_96dp">96dp</dimen>
+    <dimen name="dimen_24dp">24dp</dimen>
+    <dimen name="dimen_320dp">320dp</dimen>
 </resources>

@@ -3,7 +3,6 @@ package com.shadow.smartposter;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -13,9 +12,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,16 +24,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.shadow.smartposter.fragments.publics.ProfileFragment;
-import com.shadow.smartposter.fragments.publics.RequestCandidatureFragment;
 import com.shadow.smartposter.models.User;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PublicDashboardActivity extends AppCompatActivity
+public class AdminDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = "PublicDashboardActivity";
+    private static final String TAG = "AdminDashboardActivity";
 
     //Firebase Variables
     private FirebaseAuth mAuth;
@@ -49,15 +46,14 @@ public class PublicDashboardActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_public_dashboard);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_admin_dashboard);
 
         mAuth = FirebaseAuth.getInstance();
         mDb = FirebaseFirestore.getInstance();
         mRef = FirebaseStorage.getInstance().getReference().child("avatars");
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) getSupportActionBar().setTitle("Profile");
 
@@ -74,7 +70,7 @@ public class PublicDashboardActivity extends AppCompatActivity
         profilePicCIV = navigationHeaderView.findViewById(R.id.profile_image_civ);
         usernameTV = navigationHeaderView.findViewById(R.id.username_tv);
 
-        switchFragment(new ProfileFragment());
+
     }
 
     public void switchFragment(Fragment fragment) {
@@ -100,34 +96,9 @@ public class PublicDashboardActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.public_dashboard, menu);
-        return true;
-    }
-
-    private void sendAdminRequest() {
-        if(getSupportActionBar() != null) getSupportActionBar().setTitle("Request Candidature");
-        switchFragment(new RequestCandidatureFragment());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_aspirant) {
-            sendAdminRequest();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Handle blog_post_bnv view item clicks here.
-        int id = item.getItemId();
+        int id = menuItem.getItemId();
 
         if (id == R.id.nav_posts) {
             Intent intent = new Intent(this, BlogPostActivity.class);
@@ -146,7 +117,9 @@ public class PublicDashboardActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
+
 
     private void logoutUser() {
         mAuth.signOut();
@@ -223,5 +196,5 @@ public class PublicDashboardActivity extends AppCompatActivity
             getUserDetails();
         }
     }
-}
 
+}

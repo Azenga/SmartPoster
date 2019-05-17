@@ -102,9 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
                     .addOnCompleteListener(
                             task -> {
                                 if (task.isSuccessful()) {
-
                                     finishSetup();
-
                                 } else {
                                     Log.w(TAG, "signUpUser: Sign Up Failed", task.getException());
                                 }

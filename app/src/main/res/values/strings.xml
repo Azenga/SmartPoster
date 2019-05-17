@@ -84,6 +84,7 @@
     <string name="add_post">Add Post</string>
 
     <string-array name="aspirant_positions">
+        <item>-- Position --</item>
         <item>President</item>
         <item>Governor</item>
         <item>Senator</item>
@@ -98,6 +99,13 @@
     <string name="public_icon">Public Icon</string>
     <string name="website">Website</string>
     <string name="nickname">Nickname...</string>
+    <string name="name">Name</string>
+    <string name="official_name">Official Name...</string>
+    <string name="request_candidature">Request Candidature</string>
+    <string name="area_you_are_vying">Area you Are Vying...</string>
+    <string name="send_request">Send Request</string>
+    <string name="applications">Applications</string>
+    <string name="feedback">Feedback</string>
 
 </resources>
 
