@@ -9,11 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.shadow.smartposter.adapters.BlogPostAdapter;
 import com.shadow.smartposter.models.Post;
 
@@ -47,6 +47,7 @@ public class BlogPostActivity extends AppCompatActivity {
         }
         return false;
     };
+
     private BlogPostAdapter adapter;
 
 
@@ -65,7 +66,10 @@ public class BlogPostActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Posts");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("All Posts");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         RecyclerView blogPostRV = findViewById(R.id.blog_post_rv);
         blogPostRV.setLayoutManager(new LinearLayoutManager(this));
@@ -75,18 +79,17 @@ public class BlogPostActivity extends AppCompatActivity {
         populatePosts(null);
 
         FloatingActionButton gotoBlogPostFAB = findViewById(R.id.goto_add_post_fab);
+
         gotoBlogPostFAB.setOnClickListener(view -> startActivity(new Intent(this, AddPostActivity.class)));
     }
 
     private void populatePosts(String filter) {
 
-        // TODO: 4/14/19 Filter the Posts correctly
-        Toast.makeText(this, filter, Toast.LENGTH_SHORT).show();
-
         postList.clear();
         adapter.notifyDataSetChanged();
 
         mDb.collection("posts")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .addSnapshotListener(
                         (queryDocumentSnapshots, e) -> {
                             if (e != null) {
@@ -95,11 +98,16 @@ public class BlogPostActivity extends AppCompatActivity {
                             }
 
                             if (!queryDocumentSnapshots.isEmpty()) {
-                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
-                                    Post post = documentSnapshot.toObject(Post.class);
-                                    post.setId(documentSnapshot.getId());
-                                    postList.add(post);
-                                    adapter.notifyDataSetChanged();
+
+                                for (DocumentChange docChange : queryDocumentSnapshots.getDocumentChanges()) {
+
+                                    if (docChange.getType() == DocumentChange.Type.ADDED) {
+                                        Post post = docChange.getDocument().toObject(Post.class);
+                                        post.setId(docChange.getDocument().getId());
+                                        postList.add(post);
+                                        adapter.notifyDataSetChanged();
+                                    }
+
                                 }
                             }
                         }

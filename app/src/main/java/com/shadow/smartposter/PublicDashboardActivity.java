@@ -137,7 +137,7 @@ public class PublicDashboardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_chats) {
 
-        } else if (id == R.id.nav_profile) {
+        } else if (id == R.id.nav_update_profile) {
             startActivity(new Intent(this, SetupActivity.class));
         } else if (id == R.id.nav_logout) {
             logoutUser();

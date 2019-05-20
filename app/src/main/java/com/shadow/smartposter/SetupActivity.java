@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -59,10 +61,13 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
-        if (getSupportActionBar() != null) getSupportActionBar().setTitle("Update Profile");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Update Profile");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         mAth = FirebaseAuth.getInstance();
-        mRef = FirebaseStorage.getInstance().getReference().child("avatars");
+        mRef = FirebaseStorage.getInstance().getReference("avatars");
         mDb = FirebaseFirestore.getInstance();
 
         initWidgets();
@@ -148,27 +153,25 @@ public class SetupActivity extends AppCompatActivity {
 
             byte[] bytes = baos.toByteArray();
 
-            if (mAth.getCurrentUser() != null) {
-                String refName = mAth.getCurrentUser().getUid() + ".jpg";
+            String refName = mAth.getCurrentUser().getUid() + ".jpg";
 
-                StorageReference profilePicRef = mRef.child(refName);
+            StorageReference profilePicRef = mRef.child(refName);
 
-                profilePicRef.putBytes(bytes)
-                        .addOnSuccessListener(
-                                taskSnapshot -> {
-                                    Toast.makeText(this, "Profile Image Uploaded", Toast.LENGTH_SHORT).show();
-                                    uploadToFirestore(taskSnapshot.getMetadata().getName());
-                                }
-                        )
-                        .addOnFailureListener(
-                                e -> {
-                                    Toast.makeText(this, "Image Upload Failed", Toast.LENGTH_SHORT).show();
-                                    Log.e(TAG, "doUploads: image upload failure", e);
-                                    progressDialog.dismiss();
-                                }
-                        );
+            profilePicRef.putBytes(bytes)
+                    .addOnSuccessListener(
+                            taskSnapshot -> {
+                                Toast.makeText(this, "Profile Image Uploaded", Toast.LENGTH_SHORT).show();
+                                uploadToFirestore(taskSnapshot.getMetadata().getName());
+                            }
+                    )
+                    .addOnFailureListener(
+                            e -> {
+                                Toast.makeText(this, "Image Upload Failed", Toast.LENGTH_SHORT).show();
+                                Log.e(TAG, "doUploads: image upload failure", e);
+                                progressDialog.dismiss();
+                            }
+                    );
 
-            }
         } else {
             uploadToFirestore(null);
         }
@@ -225,7 +228,7 @@ public class SetupActivity extends AppCompatActivity {
 
     private void openImageChoosingActivity() {
 
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, RC_CHOOSE_IMAGE);
 
@@ -236,10 +239,10 @@ public class SetupActivity extends AppCompatActivity {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", true);
-        intent.putExtra("outputX", 512);
-        intent.putExtra("outputY", 512);
-        intent.putExtra("aspectX", 512);
-        intent.putExtra("aspectY", 512);
+        intent.putExtra("outputX", 256);
+        intent.putExtra("outputY", 256);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
 
@@ -309,5 +312,66 @@ public class SetupActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = mAth.getCurrentUser();
+
+        if (user == null) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        } else {
+            checkUser(user.getUid());
+        }
+    }
+
+    private void checkUser(String uid) {
+
+        progressDialog.setTitle("Checking user details");
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        mDb.document("users/" + uid)
+                .get()
+                .addOnSuccessListener(
+                        documentSnapshot -> {
+
+                            if (documentSnapshot.exists()) {
+
+                                User user = documentSnapshot.toObject(User.class);
+
+                                nameET.setText(user.getName());
+                                nicknameET.setText(user.getNickName());
+                                contactET.setText(user.getContact());
+                                countyET.setText(user.getCounty());
+                                constituenctET.setText(user.getConstituency());
+                                wardET.setText(user.getWard());
+                                websiteET.setText(user.getWebsite());
+
+                                if (user.getImageName() != null) {
+                                    StorageReference userProfileRef = mRef.child(user.getImageName());
+
+                                    long MB = 1024 * 1024;
+
+                                    userProfileRef.getBytes(MB)
+                                            .addOnSuccessListener(
+                                                    bytes -> {
+                                                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                                        profilePicCIV.setImageBitmap(bitmap);
+                                                    }
+                                            )
+                                            .addOnFailureListener(e -> Log.e(TAG, "checkUser(Getting Image): ", e));
+                                }
+                            }
+
+                            progressDialog.dismiss();
+
+                        }
+                )
+                .addOnFailureListener(e -> Log.e(TAG, "checkUser: ", e));
     }
 }

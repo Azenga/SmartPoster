@@ -14,16 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AdminDashboardActivity"></activity>
-        <activity android:name=".SetupActivity" />
+        <activity android:name=".SetupActivity"
+            android:parentActivityName=".PublicDashboardActivity"/>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".BlogPostActivity"
             android:label="@string/title_activity_blog_post"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".PublicDashboardActivity"/>
         <activity
             android:name=".AddPostActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".BlogPostActivity"/>
         <activity
             android:name=".PublicDashboardActivity"
             android:label="@string/public_dash_title"

@@ -15,8 +15,8 @@
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/ic_person_blue_32dp"
             android:contentDescription="@string/user_avatar"
+            android:src="@drawable/ic_person_blue_32dp"
             app:civ_border_color="@android:color/darker_gray"
             app:civ_border_width="2dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,13 +27,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:padding="@dimen/std_tv_pad"
+            android:layout_marginTop="16dp"
+            android:padding="@dimen/dimen_4dp"
             android:text="@string/username"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/background_dark"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/post_owner_avatar_civ"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/post_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:padding="@dimen/dimen_4dp"
+            android:text="@string/post_date"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/post_owner_avatar_civ"
+            app:layout_constraintTop_toBottomOf="@+id/owner_username_tv" />
 
         <ImageButton
             android:id="@+id/more_vert_ib"
@@ -55,14 +69,14 @@
             android:layout_width="0dp"
             android:layout_height="256dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
+            android:background="@android:color/black"
             android:contentDescription="@string/post_image"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_owner_avatar_civ"
-            app:srcCompat="@mipmap/avatar" />
+            app:layout_constraintTop_toBottomOf="@+id/post_date_tv" />
 
         <ImageButton
             android:id="@+id/comment_ib"
@@ -87,6 +101,16 @@
             app:layout_constraintStart_toEndOf="@+id/comment_ib"
             app:layout_constraintTop_toBottomOf="@+id/post_image_iv"
             app:srcCompat="@drawable/ic_share_gray_24dp" />
+
+        <TextView
+            android:id="@+id/likes_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/default_likes"
+            app:layout_constraintEnd_toStartOf="@+id/like_ib"
+            app:layout_constraintTop_toBottomOf="@+id/post_image_iv" />
 
         <ImageButton
             android:id="@+id/like_ib"
@@ -144,15 +168,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_tv" />
 
-        <TextView
-            android:id="@+id/likes_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/default_likes"
-            app:layout_constraintEnd_toStartOf="@+id/like_ib"
-            app:layout_constraintTop_toBottomOf="@+id/post_image_iv" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

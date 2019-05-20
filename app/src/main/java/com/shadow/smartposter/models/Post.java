@@ -1,9 +1,9 @@
 package com.shadow.smartposter.models;
 
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Post implements Serializable {
 
@@ -14,11 +14,12 @@ public class Post implements Serializable {
     private String imageName;
     private String[] likes;
     private String caption;
-    private Timestamp timestamp;
+    private Date timestamp;
 
-    public Post(){}
+    public Post() {
+    }
 
-    public Post(String ownerId, String imageName, String[] likes, String caption, Timestamp timestamp) {
+    public Post(String ownerId, String imageName, String[] likes, String caption, Date timestamp) {
         this.ownerId = ownerId;
         this.imageName = imageName;
         this.likes = likes;
@@ -36,10 +37,6 @@ public class Post implements Serializable {
 
     public String getOwnerId() {
         return ownerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
     }
 
     public String getImageName() {
@@ -64,5 +61,9 @@ public class Post implements Serializable {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
     }
 }

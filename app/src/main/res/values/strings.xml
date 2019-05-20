@@ -39,6 +39,7 @@
     <string name="confirm_password_hint">Confirm Password...</string>
     <string name="already_have_an_account">Already Have An Account?</string>
     <string name="profile">Profile</string>
+    <string name="update_profile">Update Profile</string>
     <string name="logout">Logout</string>
     <string name="login_text">Log In</string>
     <string name="posts">Posts</string>
@@ -106,6 +107,7 @@
     <string name="send_request">Send Request</string>
     <string name="applications">Applications</string>
     <string name="feedback">Feedback</string>
+    <string name="post_date">Post Date...</string>
 
 </resources>
 

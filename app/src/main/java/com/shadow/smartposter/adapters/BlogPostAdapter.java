@@ -14,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -22,7 +24,11 @@ import com.shadow.smartposter.R;
 import com.shadow.smartposter.models.Post;
 import com.shadow.smartposter.models.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,6 +40,7 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
     private List<Post> postList;
 
     private StorageReference mRef;
+    private FirebaseAuth mAuth;
     private FirebaseFirestore mDb;
 
     public BlogPostAdapter(Context context, List<Post> posts) {
@@ -42,6 +49,7 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
 
         mRef = FirebaseStorage.getInstance().getReference();
         mDb = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -58,6 +66,7 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
         Post post = postList.get(i);
 
         String ownerUid = post.getOwnerId();
+        String currentUserUid = mAuth.getCurrentUser().getUid();
 
         if (ownerUid != null) {
             //Setting Image
@@ -85,7 +94,7 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
 
                                     DocumentSnapshot snapshot = task.getResult();
 
-                                    if(snapshot.exists()){
+                                    if (snapshot.exists()) {
                                         User user = snapshot.toObject(User.class);
 
                                         viewHolder.ownerUsernameTV.setText(user.getName());
@@ -120,12 +129,71 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
 
         viewHolder.postTV.setText(post.getCaption());
 
-        if(post.getLikes() != null) {
-            viewHolder.likesTV.setText(post.getLikes().length + " likes");
-        }else{
-            viewHolder.likesTV.setText("0 likes");
+        mDb.document("posts/" + post.getId() + "/likes/" + currentUserUid)
+                .addSnapshotListener(
+                        (documentSnapshot, e) -> {
+                            if (e != null) {
+                                Log.e(TAG, "onBindViewHolder(Checking Like): ", e);
+                                return;
+                            }
+                            if (documentSnapshot.exists()) {
+                                viewHolder.likeIB.setImageResource(R.drawable.ic_favorite_blue_24dp);
+                            } else {
+                                viewHolder.likeIB.setImageResource(R.drawable.ic_favorite_border_favourite_24dp);
 
-        }
+                            }
+                        }
+                );
+
+        //Getting and formatting the date
+        long milliseconds = post.getTimestamp().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+        String postDate = dateFormat.format(new Date(milliseconds));
+        viewHolder.postDateTV.setText(postDate);
+
+        mDb.collection("posts/" + post.getId() + "/likes")
+                .addSnapshotListener(
+                        (queryDocumentSnapshots, e) -> {
+
+                            if (e != null) {
+                                Log.e(TAG, "onBindViewHolder(Getting Likes): ", e);
+                                return;
+                            }
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                int count = queryDocumentSnapshots.size();
+
+                                if(count == 1){
+                                    viewHolder.likesTV.setText("1 like");
+                                }else{
+                                    viewHolder.likesTV.setText(count + " likes");
+                                }
+                            }else {
+                                viewHolder.likesTV.setText("0 likes");
+                            }
+
+                        }
+                );
+
+        viewHolder.likeIB.setOnClickListener(
+                view -> {
+                    mDb.document("posts/" + post.getId() + "/likes/" + currentUserUid)
+                            .get()
+                            .addOnSuccessListener(
+                                    documentSnapshot -> {
+                                        if (documentSnapshot.exists()) {
+                                            mDb.document("posts/" + post.getId() + "/likes/" + currentUserUid).delete();
+                                        } else {
+                                            Map<String, Object> likeMap = new HashMap<>();
+                                            likeMap.put("timestamp", FieldValue.serverTimestamp());
+                                            mDb.document("posts/" + post.getId() + "/likes/" + currentUserUid)
+                                                    .set(likeMap);
+                                        }
+                                    }
+                            )
+                            .addOnFailureListener(e -> Log.e(TAG, "onBindViewHolder: ", e));
+                }
+        );
 
     }
 
@@ -137,7 +205,7 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView ownerAvatarCIV;
-        TextView ownerUsernameTV;
+        TextView ownerUsernameTV, postDateTV;
         ImageButton moreVertIB, shareIB, likeIB, commentIB;
         ImageView postImageIV;
         TextView postTV, likesTV, readMoreTV, viewCommentsTV;
@@ -149,10 +217,11 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
 
             ownerAvatarCIV = itemView.findViewById(R.id.post_owner_avatar_civ);
             ownerUsernameTV = itemView.findViewById(R.id.owner_username_tv);
+            postDateTV = itemView.findViewById(R.id.post_date_tv);
             moreVertIB = itemView.findViewById(R.id.more_vert_ib);
             postImageIV = itemView.findViewById(R.id.post_image_iv);
             shareIB = itemView.findViewById(R.id.share_ib);
-            likesTV = itemView.findViewById(R.id.likes_tv);
+            likesTV = itemView.findViewById(R.id.likes_text_view);
             likeIB = itemView.findViewById(R.id.like_ib);
             commentIB = itemView.findViewById(R.id.comment_ib);
             postTV = itemView.findViewById(R.id.post_tv);

@@ -21,14 +21,15 @@ import android.widget.Toast;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.shadow.smartposter.models.Post;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -44,7 +45,6 @@ public class AddPostActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private boolean imageSelected = false;
-
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDb;
@@ -111,8 +111,15 @@ public class AddPostActivity extends AppCompatActivity {
                         taskSnapshot -> {
                             String postImageName = taskSnapshot.getMetadata().getName();
                             String ownerId = mAuth.getCurrentUser().getUid();
-                            Post post = new Post(ownerId, postImageName, null, caption, new Timestamp(new Date()));
-                            takePostToFirestore(post);
+
+                            Map<String, Object> postMap = new HashMap<>();
+                            postMap.put("ownerId", ownerId);
+                            postMap.put("imageName", postImageName);
+                            postMap.put("likes", null);
+                            postMap.put("caption", caption);
+                            postMap.put("timestamp", FieldValue.serverTimestamp());
+
+                            takePostToFirestore(postMap);
                         }
                 )
                 .addOnFailureListener(e -> {
@@ -124,7 +131,7 @@ public class AddPostActivity extends AppCompatActivity {
 
     }
 
-    private void takePostToFirestore(Post post) {
+    private void takePostToFirestore(Map<String, Object> post) {
         mDb.collection("posts")
                 .add(post)
                 .addOnCompleteListener(
