@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,13 +17,18 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.shadow.smartposter.adapters.ChatsAdapter;
+import com.shadow.smartposter.models.Chat;
 import com.shadow.smartposter.models.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -36,8 +43,10 @@ public class MessageActivity extends AppCompatActivity {
     private CircleImageView profilePicCIV;
     private EditText msgET;
     private ImageButton sendMsgBtn;
+    private RecyclerView chatsRV;
 
     private String mOtherUserUid = null;
+    private List<Chat> mChats;
 
 
     private FirebaseAuth mAuth;
@@ -68,7 +77,7 @@ public class MessageActivity extends AppCompatActivity {
         String senderUid = mAuth.getCurrentUser().getUid();
         String content = String.valueOf(msgET.getText());
 
-        if(TextUtils.isEmpty(content)){
+        if (TextUtils.isEmpty(content)) {
             msgET.setError("Type in a Message");
             msgET.requestFocus();
             return;
@@ -97,14 +106,52 @@ public class MessageActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDb = FirebaseFirestore.getInstance();
         mRef = FirebaseStorage.getInstance().getReference("avatars");
+        mChats = new ArrayList<>();
 
         toolbar = findViewById(R.id.toolbar);
         usernameTV = findViewById(R.id.name_tv);
         profilePicCIV = findViewById(R.id.profile_image_civ);
+        chatsRV = findViewById(R.id.chats_rv);
+        chatsRV.setLayoutManager(new LinearLayoutManager(this));
+        chatsRV.setHasFixedSize(true);
 
         sendMsgBtn = findViewById(R.id.send_msg_btn);
         msgET = findViewById(R.id.msg_et);
 
+    }
+
+    private void readMessages() {
+        String currentUserUid = mAuth.getCurrentUser().getUid();
+        mDb.collection("chats")
+                .addSnapshotListener(
+                        (queryDocumentSnapshots, e) -> {
+                            if (e != null) {
+                                Log.e(TAG, "readMessages: ", e);
+                                return;
+                            }
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                mChats.clear();
+
+                                for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
+                                    Chat chat = snapshot.toObject(Chat.class);
+
+                                    if (chat.getSender().equalsIgnoreCase(currentUserUid) && chat.getReceiver().equalsIgnoreCase(mOtherUserUid)) {
+                                        mChats.add(chat);
+                                    }
+
+                                    if (chat.getReceiver().equalsIgnoreCase(currentUserUid) && chat.getSender().equalsIgnoreCase(mOtherUserUid)) {
+                                        mChats.add(chat);
+                                    }
+
+                                }
+
+                                ChatsAdapter adapter = new ChatsAdapter(mChats);
+                                chatsRV.setAdapter(adapter);
+                            }
+                        }
+                );
     }
 
     @Override
@@ -117,6 +164,8 @@ public class MessageActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
+
+        readMessages();
 
     }
 

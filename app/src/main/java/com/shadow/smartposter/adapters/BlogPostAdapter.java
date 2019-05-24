@@ -163,12 +163,12 @@ public class BlogPostAdapter extends RecyclerView.Adapter<BlogPostAdapter.ViewHo
                             if (!queryDocumentSnapshots.isEmpty()) {
                                 int count = queryDocumentSnapshots.size();
 
-                                if(count == 1){
+                                if (count == 1) {
                                     viewHolder.likesTV.setText("1 like");
-                                }else{
+                                } else {
                                     viewHolder.likesTV.setText(count + " likes");
                                 }
-                            }else {
+                            } else {
                                 viewHolder.likesTV.setText("0 likes");
                             }
 
