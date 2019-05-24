@@ -13,20 +13,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminDashboardActivity"></activity>
-        <activity android:name=".SetupActivity"
-            android:parentActivityName=".PublicDashboardActivity"/>
+        <activity
+            android:name=".MessageActivity"
+            android:parentActivityName=".AllUserActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AllUserActivity"
+            android:parentActivityName=".PublicDashboardActivity" />
+        <activity android:name=".AdminDashboardActivity" />
+        <activity
+            android:name=".SetupActivity"
+            android:parentActivityName=".PublicDashboardActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".BlogPostActivity"
             android:label="@string/title_activity_blog_post"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".PublicDashboardActivity"/>
+            android:parentActivityName=".PublicDashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddPostActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".BlogPostActivity"/>
+            android:parentActivityName=".BlogPostActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PublicDashboardActivity"
             android:label="@string/public_dash_title"

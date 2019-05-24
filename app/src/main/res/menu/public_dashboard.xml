@@ -6,4 +6,10 @@
         android:orderInCategory="100"
         android:title="@string/request_candidature"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_all_users"
+        android:orderInCategory="101"
+        android:title="@string/all_users"
+        app:showAsAction="never" />
 </menu>

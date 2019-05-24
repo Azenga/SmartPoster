@@ -108,6 +108,10 @@
     <string name="applications">Applications</string>
     <string name="feedback">Feedback</string>
     <string name="post_date">Post Date...</string>
+    <string name="all_users">All Users</string>
+    <string name="message">Message...</string>
+    <string name="send_icon">Send Icon</string>
+    <string name="dummy_message">Dummy Message</string>
 
 </resources>
 

@@ -118,9 +118,17 @@ public class PublicDashboardActivity extends AppCompatActivity
         if (id == R.id.action_aspirant) {
             sendAdminRequest();
             return true;
+        }else if(id == R.id.action_all_users){
+            sendToAllUsers();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sendToAllUsers() {
+        Intent intent = new Intent(this, AllUserActivity.class);
+        startActivity(intent);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
