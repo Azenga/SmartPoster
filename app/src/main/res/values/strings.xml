@@ -112,6 +112,7 @@
     <string name="message">Message...</string>
     <string name="send_icon">Send Icon</string>
     <string name="dummy_message">Dummy Message</string>
+    <string name="last_msg">This is the mUserUids last message...</string>
 
 </resources>
 

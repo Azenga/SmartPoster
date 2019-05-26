@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.shadow.smartposter.fragments.publics.ChatsFragment;
 import com.shadow.smartposter.fragments.publics.ProfileFragment;
 import com.shadow.smartposter.fragments.publics.RequestCandidatureFragment;
 import com.shadow.smartposter.models.User;
@@ -144,7 +145,7 @@ public class PublicDashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_aspirants) {
 
         } else if (id == R.id.nav_chats) {
-
+            switchFragment(new ChatsFragment());
         } else if (id == R.id.nav_update_profile) {
             startActivity(new Intent(this, SetupActivity.class));
         } else if (id == R.id.nav_logout) {
